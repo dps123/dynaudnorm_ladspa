@@ -3,7 +3,7 @@ export CXXFLAGS = -Wall -O3 -fPIC -DPIC -DNDEBUG
 
 # This is where it will be installed
 export PREFIX = /usr
-export LADSPA_PATH = $(PREFIX)/lib/ladspa/
+export LADSPA_PATH = $(PREFIX)/lib/ladspa
 
 # End of user-editable options.
 
@@ -19,6 +19,10 @@ all: $(LIB)
 .PHONY: install
 install: all
 	cp -f $(LIB) $(LADSPA_PATH)/
+
+.PHONY: uninstall
+uninstall:
+	rm -f $(LADSPA_PATH)/$(LIB)
 
 .PHONY: clean
 clean:

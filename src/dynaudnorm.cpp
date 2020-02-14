@@ -195,12 +195,15 @@ static void activateDynaudnorm(LADSPA_Handle instance) {
 	}
 }
 
+static void deactivateDynaudnorm(LADSPA_Handle instance) {
+	Dynaudnorm *plugin_data = (Dynaudnorm *)instance;
+	delete(plugin_data->dan);
+}
+
 static void cleanupDynaudnorm(LADSPA_Handle instance) {
 	Dynaudnorm *plugin_data = (Dynaudnorm *)instance;
 	std::free(plugin_data->input);
 	std::free(plugin_data->output);
-	delete(plugin_data->dan);
-
 	std::free(instance);
 }
 
@@ -208,8 +211,7 @@ static void runDynaudnorm(LADSPA_Handle instance, unsigned long sample_count) {
 	Dynaudnorm *plugin_data = (Dynaudnorm *)instance;
 	int64_t in_count = sample_count;
 	int64_t out_count;
-	MDynamicAudioNormalizer *dan = plugin_data->dan;
-	dan->process(plugin_data->input, plugin_data->output, in_count, out_count);
+	plugin_data->dan->process(plugin_data->input, plugin_data->output, in_count, out_count);
 }
 
 static void fillDescriptor(LADSPA_Descriptor * descriptor, int channels, const char *label){
@@ -338,7 +340,7 @@ static void fillDescriptor(LADSPA_Descriptor * descriptor, int channels, const c
 	descriptor->activate = activateDynaudnorm;
 	descriptor->cleanup = cleanupDynaudnorm;
 	descriptor->connect_port = connectPortDynaudnorm;
-	descriptor->deactivate = NULL;
+	descriptor->deactivate = deactivateDynaudnorm;
 	descriptor->instantiate = instantiateDynaudnorm;
 	descriptor->run = runDynaudnorm;
 	descriptor->run_adding = NULL;
