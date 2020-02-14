@@ -22,7 +22,7 @@ install: all
 
 .PHONY: clean
 clean:
-	-rm -f *.o $(LIB)
+	-rm -f $(OBJS) $(LIB)
 
 .PHONY: depend
 depend: $(SRCS)

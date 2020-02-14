@@ -187,8 +187,22 @@ static void activateDynaudnorm(LADSPA_Handle instance) {
 						plugin_data->enableDCCorrection, plugin_data->altBoundaryMode, NULL);
 	//plugin_data->dan->setLogFunction(Log);
 	plugin_data->dan->initialize();
-	
 
+	int64_t delayInSamples;
+	int64_t out_count;
+	if (plugin_data->dan->getInternalDelay(delayInSamples)) {
+		LADSPA_Data **input = (LADSPA_Data **) std::malloc(plugin_data->channels*sizeof(LADSPA_Data *));
+		for (uint32_t k = 0; k < plugin_data->channels; k++) {
+			input[k] = (LADSPA_Data *) std::calloc(delayInSamples, sizeof(LADSPA_Data));
+		}
+
+		plugin_data->dan->processInplace(input, delayInSamples, out_count);
+
+		for (uint32_t k = 0; k < plugin_data->channels; k++) {
+			std::free((LADSPA_Data *)input[k]);
+		}
+		std::free((LADSPA_Data **)input);
+	}
 }
 
 static void cleanupDynaudnorm(LADSPA_Handle instance) {
