@@ -1,4 +1,4 @@
-/* Copyright 2013 Richard Taylor
+/* Copyright 2020 Pavel Demenkov
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -12,17 +12,7 @@
 
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-  CREDITS:
-
-  Much of the code here was adapted from Steve Harris's swh-plugins
-  (version 0.4.15) found at http://plugin.org.uk/.  Thanks Steve for
-  making your code available.
-
-  The guts of the code, in util/biquad.h, is an implementation
-  of the biquad filters described in Robert Bristow-Johnson's "Cookbook
-  formulae for audio EQ biquad filter coefficients" found here:
-  http://www.musicdsp.org/files/Audio-EQ-Cookbook.txt
+ 
 */
 
 #include <cstdlib>
