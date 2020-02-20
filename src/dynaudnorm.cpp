@@ -34,6 +34,7 @@
 
 #define DAN_AUDIO_INPUT1   9
 #define DAN_AUDIO_OUTPUT1  10
+/*
 #define DAN_AUDIO_INPUT2   11
 #define DAN_AUDIO_OUTPUT2  12
 #define DAN_AUDIO_INPUT3   13
@@ -48,9 +49,8 @@
 #define DAN_AUDIO_OUTPUT7  22
 #define DAN_AUDIO_INPUT8   23
 #define DAN_AUDIO_OUTPUT8  24
+*/
 
-
-#define INT2BOOL(X) ((X) != 0)
 #define FLOAT2BOOL(X) ((X) > 0)
 
 static LADSPA_Descriptor *dynaudnormDescriptors[8] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
@@ -89,7 +89,7 @@ static LADSPA_Handle instantiateDynaudnorm(
 	Dynaudnorm *plugin_data = (Dynaudnorm *)std::calloc(1, sizeof(Dynaudnorm));
 	plugin_data->input = (LADSPA_Data **) std::malloc(8*sizeof(LADSPA_Data *));
 	plugin_data->output = (LADSPA_Data **) std::malloc(8*sizeof(LADSPA_Data *));
-	plugin_data->sampleRate = s_rate;
+	plugin_data->sampleRate = (uint32_t)s_rate;
 
 	// DEFAULT_VALUES
 	plugin_data->frameLenMsec = 500;
@@ -141,7 +141,7 @@ static void connectPortDynaudnorm(
 		plugin->altBoundaryMode = FLOAT2BOOL(data[0]);
 		break;
 	default:
-		if (port>=DAN_AUDIO_INPUT1 && port<=DAN_AUDIO_OUTPUT8){
+		if (port>=DAN_AUDIO_INPUT1 /*&& port - DAN_AUDIO_OUTPUT1 / 2 < 8*/){
 			if (DAN_AUDIO_INPUT1 % 2 == port % 2) {
 				plugin->input[(port-DAN_AUDIO_INPUT1) / 2] = data;
 				if (data!=NULL)

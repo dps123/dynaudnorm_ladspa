@@ -19,10 +19,6 @@
 // http://www.gnu.org/licenses/lgpl-2.1.txt
 //////////////////////////////////////////////////////////////////////////////////
 
-#ifndef __STDC_FORMAT_MACROS
-#define __STDC_FORMAT_MACROS 1
-#endif
-
 #include "DynamicAudioNormalizer.h"
 
 #include "Common.h"

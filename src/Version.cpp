@@ -175,6 +175,10 @@ const char *const DYNAUDNORM_NS::BUILD_ARCH =
 	"x64";
 #elif defined(_M_IX86) || defined(__i386__)
 	"x86";
+#elif defined(__arm__)
+	"arm";
+#elif defined(__aarch64__)
+	"aarch64";
 #else
 	#error Architecture is not supported!
 #endif
