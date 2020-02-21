@@ -183,7 +183,7 @@ static void activateDynaudnorm(LADSPA_Handle instance) {
 	if (plugin_data->dan->getInternalDelay(delayInSamples)) {
 		LADSPA_Data **input = (LADSPA_Data **) std::malloc(plugin_data->channels*sizeof(LADSPA_Data *));
 		for (uint32_t k = 0; k < plugin_data->channels; k++) {
-			input[k] = (LADSPA_Data *) std::calloc(delayInSamples, sizeof(LADSPA_Data));
+			input[k] = (LADSPA_Data *) std::calloc((size_t)delayInSamples, sizeof(LADSPA_Data));
 		}
 
 		plugin_data->dan->processInplace(input, delayInSamples, out_count);

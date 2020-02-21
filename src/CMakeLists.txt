@@ -1,4 +1,4 @@
-
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_library(dynaudnorm MODULE DynamicAudioNormalizer.cpp  dynaudnorm.cpp  FrameBuffer.cpp  GaussianFilter.cpp  Logging.cpp  Version.cpp)
 

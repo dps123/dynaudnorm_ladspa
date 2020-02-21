@@ -18,4 +18,4 @@ set(CMAKE_SHARED_MODULE_PREFIX "")
 
 add_subdirectory(src)
 
-#file(GLOB HEADERS "${PROJECT_SOURCE_DIR}/include/*.h")
+file(GLOB HEADERS "${PROJECT_SOURCE_DIR}/include/*.h")
