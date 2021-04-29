@@ -9,6 +9,7 @@ include(cppcheck)
 set(COMMONFLAGS "-pipe")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMONFLAGS}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11")
+string(REPLACE " -Werror" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3 -DNDEBUG -fPIC -DPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
